@@ -7,6 +7,17 @@ const ArticleType = builder.objectRef<SQL.Row["article"]>("Article").implement({
     id: t.exposeID("articleID"),
     url: t.exposeString("url"),
     title: t.exposeString("title"),
+    comments: t.field({
+      type: [CommentType],
+      resolve: (article) => Article.comments(article.articleID),
+    })
+  }),
+});
+
+const CommentType = builder.objectRef<SQL.Row["comment"]>("Comment").implement({
+  fields: (t) => ({
+    id: t.exposeID("commentID"),
+    text: t.exposeString("text"),
   }),
 });
 
@@ -41,4 +52,12 @@ builder.mutationFields((t) => ({
     },
     resolve: (_, args) => Article.create(args.title, args.url),
   }),
+  addComment: t.field({
+    type: CommentType,
+    args: {
+      articleID: t.arg.string({ required: true }),
+      text: t.arg.string({ required: true })
+    },
+    resolve: (_, args) => Article.addComment(args.articleID, args.text)
+  })
 }));
