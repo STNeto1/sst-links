@@ -1,24 +1,22 @@
 import {
-  useQuery,
-  useClient,
-  createClient,
-  createRequest,
-  RequestPolicy,
-  OperationResult,
-  UseMutationState,
   OperationContext,
-  defaultExchanges,
+  OperationResult,
+  RequestPolicy,
   UseMutationResponse,
+  UseMutationState,
+  createRequest,
+  useClient,
+  useQuery
 } from "urql";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  QueryResult,
-  QueryRequest,
-  MutationResult,
   MutationRequest,
-  generateQueryOp,
+  MutationResult,
+  QueryRequest,
+  QueryResult,
   generateMutationOp,
+  generateQueryOp,
 } from "./genql";
 
 import { pipe, toPromise } from "wonka";

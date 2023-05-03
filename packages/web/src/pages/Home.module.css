@@ -17,3 +17,11 @@
 .url {
   color: var(--text-dimmed);
 }
+
+.footer {
+  margin-top: 0.8rem;
+}
+
+.footerSeparator {
+  margin: 0 0.5rem;
+}
