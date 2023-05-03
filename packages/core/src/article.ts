@@ -24,3 +24,21 @@ export function list() {
     .orderBy("created", "desc")
     .execute();
 }
+
+export function addComment(articleID: string, text: string) {
+  return SQL.DB.insertInto("comment")
+    .values({
+      commentID: ulid(),
+      articleID,
+      text
+    })
+    .returningAll()
+    .executeTakeFirstOrThrow()
+}
+
+export function comments(articleID: string) {
+  return SQL.DB.selectFrom("comment")
+    .selectAll()
+    .where("articleID", "=", articleID)
+    .execute()
+}
